@@ -1,0 +1,9 @@
+development: &non_production_settings
+  unfuddle_project_id: 12345
+  unfuddle_subdomain: mycorp
+  unfuddle_username: myuser
+  unfuddle_password: mypass
+test:
+  <<: *non_production_settings
+production:
+  <<: *non_production_settings
