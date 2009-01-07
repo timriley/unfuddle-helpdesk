@@ -1,8 +1,0 @@
-log/*.log
-tmp/**/*
-.DS_Store
-doc/api
-doc/app
-config/config.yml
-config/database.yml
-config/thin.yml
