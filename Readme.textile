@@ -1,0 +1,3 @@
+h1. unfuddle-mirror
+
+A Sinatra application that provides access to Unfuddle tickets without requiring a user account. Ideal for user access to helpdesk tickets.

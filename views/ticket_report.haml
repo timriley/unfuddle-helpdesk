@@ -1,0 +1,13 @@
+%h1 Tickets
+
+- @ticket_report['groups']['group'].each do |group|
+  %h2= h(group['title'])
+  
+  %table
+    - group['tickets']['ticket'].each do |ticket|
+      %tr
+        %td
+          %a{:href => "/tickets/#{h(ticket['number'])}"}= "##{h(ticket['number'])}"
+        %td
+          = h(ticket['summary'])        
+    

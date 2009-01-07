@@ -1,0 +1,7 @@
+%table
+  - @ticket.each_pair do |key, val|
+    %tr
+      %td
+        %strong= h(key)
+      %td
+        = h(val)
