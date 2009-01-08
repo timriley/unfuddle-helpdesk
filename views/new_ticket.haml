@@ -1,0 +1,15 @@
+%form{:action => '/tickets', :method => 'post'}
+  %label{:for => 'name'} Name
+  %br/
+  %input{:type => 'text', :name => 'name'}/
+  %br/
+  %label{:for => 'summary'} Summary
+  %br/
+  %input{:type => 'text', :name => 'summary'}/
+  %br/
+  %label{:for => 'description'} Description
+  %br/
+  %textarea{:name => 'desciption'}
+  %br/
+  %input{:type => 'submit', :value => 'Submit'}/
+  

@@ -3,9 +3,11 @@ require 'yaml'
 require 'haml'
 require 'sinatra'
 require 'httparty'
+require 'net/http'
 
 configure do
   require File.join(File.dirname(__FILE__), '/app_config')
+  enable :sessions
 end
 
 require File.join(File.dirname(__FILE__), '/lib/unfuddle')
@@ -53,7 +55,12 @@ get '/tickets/new' do
 end
 
 post '/tickets' do
-
+  p params
+  
+  success = Unfuddle.post_ticket(params)
+  
+  set_cookie('notice', success ? 'ticket_successful' : 'ticket_failed')
+  redirect '/'
 end
 
 get '/tickets/:id' do
