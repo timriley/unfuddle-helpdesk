@@ -269,7 +269,7 @@ body.blueprint .showgrid { background: url(../images/grid.png); }
 body.blueprint .container { width: 950px; margin: 0 auto; overflow: auto; overflow: -moz-scrollbars-none; display: inline-block; }
 body.blueprint .container { display: block; }
 
-body#index #menubar { width: 100%; background-color: #2b2b2b; border-bottom: 1px solid #fff; color: #fff; }
+body#index #menubar { width: 100%; background-color: #2b2b2b; border-bottom: 1px solid #eee; color: #fff; }
 body#index #menubar a { color: #fff; text-decoration: none; }
 body#index #menubar #app-suite-links { float: left; margin: 0; padding: 0; border: 0; overflow: auto; overflow: -moz-scrollbars-none; display: inline-block; }
 body#index #menubar #app-suite-links { display: block; }
@@ -284,8 +284,17 @@ body#index #menubar #site-actions li.last { padding-right: 0px; }
 body#index #titlebar { width: 100%; min-height: 3em; margin-bottom: 1.5em; background: #279914 url(../images/body-bg.png) repeat-x; }
 body#index #titlebar #header { float: left; width: 950px; margin-right: 10px; padding-top: 1em; }
 body#index #titlebar #header h1 { font-size: 2em; font-weight: bold; margin-bottom: 0.75em; color: #fff; float: left; width: 950px; margin-right: 10px; }
-body#index #navigation { float: left; width: 190px; margin-right: 10px; }
-body#index #main-content { float: left; width: 750px; margin-right: 0; }
-body#index #footer { float: left; width: 950px; margin-right: 10px; }
-body#index #footer #legalese { float: left; width: 790px; margin-right: 10px; }
-body#index #footer #footer-links { float: left; width: 150px; margin-right: 0; }
+body#index #tickets { float: left; width: 750px; margin-right: 10px; }
+body#index #tickets table td, body#index #tickets table th { padding: 2px; }
+body#index #tickets table td.numeric, body#index #tickets table th.numeric { text-align: right; }
+body#index #tickets table tbody th { text-align: center; }
+body#index #tickets table thead { font-size: .9em; }
+body#index #tickets table thead th.even { background-color: #ddddee; }
+body#index #tickets table tfoot { font-size: .9em; }
+body#index #tickets table tfoot td.even { background-color: #ddddee; }
+body#index #tickets table tr.odd { background-color: #cefbb3; }
+body#index #tickets table tr.odd td.even { background-color: #acd9a2; }
+body#index #tickets table tr.even { background-color: #f9e5a7; }
+body#index #tickets table tr.even td.even { background-color: #d7c396; }
+body#index #tickets table .td { padding: 0.5em; }
+body#index #sidebar { float: left; width: 190px; margin-right: 0; }
