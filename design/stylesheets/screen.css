@@ -118,6 +118,10 @@ caption { background: #eee; }
 
 .loud { color: #111111; }
 
+body { font-size: 85%; }
+body th { background: inherit; }
+body tr.even td { background: inherit; }
+
 h1 { font-weight: normal; color: #222222; font-size: 2em; margin-bottom: 0.75em; }
 
 body.blueprint .container { width: 950px; margin: 0 auto; overflow: auto; overflow: -moz-scrollbars-none; display: inline-block; }
@@ -289,12 +293,14 @@ body#index #tickets table td, body#index #tickets table th { padding: 2px; }
 body#index #tickets table td.numeric, body#index #tickets table th.numeric { text-align: right; }
 body#index #tickets table tbody th { text-align: center; }
 body#index #tickets table thead { font-size: .9em; }
-body#index #tickets table thead th.even { background-color: #ddddee; }
+body#index #tickets table thead th.even { background-color: white; }
 body#index #tickets table tfoot { font-size: .9em; }
-body#index #tickets table tfoot td.even { background-color: #ddddee; }
-body#index #tickets table tr.odd { background-color: #cefbb3; }
-body#index #tickets table tr.odd td.even { background-color: #acd9a2; }
-body#index #tickets table tr.even { background-color: #f9e5a7; }
-body#index #tickets table tr.even td.even { background-color: #d7c396; }
-body#index #tickets table .td { padding: 0.5em; }
+body#index #tickets table tfoot td.even { background-color: white; }
+body#index #tickets table tr.odd { background-color: white; }
+body#index #tickets table tr.odd td.even { background-color: white; }
+body#index #tickets table tr.even { background-color: #f5f5f5; }
+body#index #tickets table tr.even td.even { background-color: #f5f5f5; }
+body#index #tickets table th { border-bottom: 1px solid #666; background: #f5f5f5; }
+body#index #tickets table td, body#index #tickets table th { vertical-align: top; padding-left: 0.5em; padding-right: 0.5em; }
 body#index #sidebar { float: left; width: 190px; margin-right: 0; }
+body#index #sidebar #ticket-age { font-size: 3em; line-height: 1; margin-bottom: 0.5em; font-weight: bold; color: red; }
