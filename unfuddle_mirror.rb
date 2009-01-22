@@ -1,10 +1,12 @@
 require 'rubygems'
 
-gem 'sinatra-sinatra', '~> 0.9'
+gem 'sinatra', '~> 0.9'
 require 'sinatra'
 
-require 'yaml'
+gem 'haml', '~> 2.1'
 require 'haml'
+
+require 'yaml'
 require 'httparty'
 require 'net/http'
 require 'compass'
@@ -21,8 +23,7 @@ helpers do
   alias_method :h, :escape_html
   
   def versioned_stylesheet(stylesheet)
-    # "/stylesheets/#{stylesheet}.css?" + File.mtime(File.join(Sinatra::Application.views, "stylesheets", "#{stylesheet}.sass")).to_i.to_s
-    "/stylesheets/#{stylesheet}.css"
+    "/stylesheets/#{stylesheet}.css?" + File.mtime(File.join(Sinatra::Application.views, "stylesheets", "#{stylesheet}.sass")).to_i.to_s
   end
   def versioned_js(js)
     "/javascripts/#{js}.js?" + File.mtime(File.join(Sinatra::Application.public, "javascripts", "#{js}.js")).to_i.to_s
