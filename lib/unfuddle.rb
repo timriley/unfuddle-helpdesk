@@ -1,8 +1,18 @@
+# This method is needed for HTTParty to work properly
+# Extracted from http://github.com/wycats/merb-extlib/tree/master/lib/merb-extlib/string.rb
+class String
+  def snake_case
+    return self.downcase if self =~ /^[A-Z]+$/
+    self.gsub(/([A-Z]+)(?=[A-Z][a-z]?)|\B[A-Z]/, '_\&') =~ /_*(.*)/
+      return $+.downcase
+  end
+end
+
 class Unfuddle
   include HTTParty
   
-  base_uri    "https://#{Sinatra.options.unfuddle_subdomain}.unfuddle.com/api/v1/projects/#{Sinatra.options.unfuddle_project_id}"
-  basic_auth  Sinatra.options.unfuddle_username, Sinatra.options.unfuddle_password
+  base_uri    "https://#{Sinatra::Application.unfuddle_subdomain}.unfuddle.com/api/v1/projects/#{Sinatra::Application.unfuddle_project_id}"
+  basic_auth  Sinatra::Application.unfuddle_username, Sinatra::Application.unfuddle_password
 
   format :xml
 
@@ -16,12 +26,12 @@ class Unfuddle
   
   # HTTParty doesn't like that this request returns a nil body. Let's do it manually for now.
   def self.post_ticket(params)
-    http                = Net::HTTP.new("#{Sinatra.options.unfuddle_subdomain}.unfuddle.com", 443)
+    http                = Net::HTTP.new("#{Sinatra::Application.unfuddle_subdomain}.unfuddle.com", 443)
     http.use_ssl        = true
     http.verify_mode    = OpenSSL::SSL::VERIFY_NONE
 
-    request             = Net::HTTP::Post.new("/api/v1/projects/#{Sinatra.options.unfuddle_project_id}/tickets", {'Content-type' => 'application/xml'})
-    request.basic_auth  Sinatra.options.unfuddle_username, Sinatra.options.unfuddle_password
+    request             = Net::HTTP::Post.new("/api/v1/projects/#{Sinatra::Application.unfuddle_project_id}/tickets", {'Content-type' => 'application/xml'})
+    request.basic_auth  Sinatra::Application.unfuddle_username, Sinatra::Application.unfuddle_password
     request.body        = "<ticket><priority>3</priority><summary>#{params[:name]} || #{params[:summary]}</summary><description>#{params[:description]}</description></ticket>"
     
     response            = http.request(request)

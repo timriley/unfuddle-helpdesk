@@ -4,14 +4,33 @@
   %head
     %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}/
     %title= "Helpdesk Tickets - #{@title}"
-    %link{:href => versioned_stylesheet('screen'), :media => "screen", :rel => "stylesheet", :type => "text/css"}/
-
-  %body
-    #header
-      %h1
-        %a{:href => '/'} Helpdesk Tickets
-
-    #wrapper
-      #content
-        %h1= @title
-        = yield
+    %link{:href => versioned_stylesheet('screen'),  :media => 'screen', :rel => 'stylesheet', :type => 'text/css'}/
+    %link{:href => versioned_stylesheet('print'),   :media => 'print',  :rel => 'stylesheet', :type => 'text/css'}/
+    /[if IE]
+      %link{:href => versioned_stylesheet('ie'),    :media => 'screen', :rel => 'stylesheet', :type => 'text/css'}/
+  
+  %body#index.blueprint
+    #menubar
+      .container
+        %ul#app-suite-links
+          %li.first
+            %strong
+              %a{:href => '#'} AMC
+          %li
+            %a{:href => '#'} News
+          %li
+            %a{:href => '#'} Phones
+          %li
+            %a{:href => '#'} Helpdesk
+        %ul#site-actions
+          %li
+            %a{:href => '#'} Help
+            
+    #titlebar
+      .container
+        #header
+          %h1
+            %a{:href => '/'} IT Helpdesk
+          
+    .container
+      = yield

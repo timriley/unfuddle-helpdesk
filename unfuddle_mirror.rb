@@ -1,53 +1,57 @@
 require 'rubygems'
+
+gem 'sinatra-sinatra', '~> 0.9'
+require 'sinatra'
+
 require 'yaml'
 require 'haml'
-require 'sinatra'
 require 'httparty'
 require 'net/http'
+require 'compass'
 
 configure do
-  require File.join(File.dirname(__FILE__), '/app_config')
+  require File.join(File.dirname(__FILE__), 'app_config')
   enable :sessions
 end
 
-require File.join(File.dirname(__FILE__), '/lib/unfuddle')
-
-# This method is needed for HTTParty to work properly
-# Extracted from http://github.com/wycats/merb-extlib/tree/master/lib/merb-extlib/string.rb
-class String
-  def snake_case
-    return self.downcase if self =~ /^[A-Z]+$/
-    self.gsub(/([A-Z]+)(?=[A-Z][a-z]?)|\B[A-Z]/, '_\&') =~ /_*(.*)/
-      return $+.downcase
-  end
-end
+require File.join(File.dirname(__FILE__), 'lib', 'unfuddle')
 
 helpers do
-  # Thanks to http://www.gittr.com/index.php/archive/using-rackutils-in-sinatra-escape_html-h-in-rails/
   include Rack::Utils
   alias_method :h, :escape_html
   
-  # Thanks to Tim Lucas for these helpers, taken from http://github.com/toolmantim/toolmantim/tree/master/toolmantim.rb
   def versioned_stylesheet(stylesheet)
-    "/stylesheets/#{stylesheet}.css?" + File.mtime(File.join(Sinatra.application.options.views, "stylesheets", "#{stylesheet}.sass")).to_i.to_s
+    # "/stylesheets/#{stylesheet}.css?" + File.mtime(File.join(Sinatra::Application.views, "stylesheets", "#{stylesheet}.sass")).to_i.to_s
+    "/stylesheets/#{stylesheet}.css"
   end
   def versioned_js(js)
-    "/javascripts/#{js}.js?" + File.mtime(File.join(Sinatra.application.options.public, "javascripts", "#{js}.js")).to_i.to_s
+    "/javascripts/#{js}.js?" + File.mtime(File.join(Sinatra::Application.public, "javascripts", "#{js}.js")).to_i.to_s
   end
   def partial(name)
     haml(:"_#{name}", :layout => false)
   end
+  
+  def cycle
+    @_cycle ||= reset_cycle
+    @_cycle = [@_cycle.pop] + @_cycle
+    @_cycle.first
+  end
+  def reset_cycle
+    @_cycle = %w(odd even)
+  end
 end
 
 get '/' do
-  @ticket_report = Unfuddle.get_ticket_report(Sinatra.options.unfuddle_ticket_report_id)
+  @ticket_report = Unfuddle.get_ticket_report(Sinatra::Application.unfuddle_ticket_report_id)
   haml :ticket_report
 end
 
-get "/stylesheets/screen.css" do
-  content_type 'text/css'
-  headers "Expires" => (Time.now + 60*60*24*356*3).httpdate # Cache for 3 years
-  sass :"stylesheets/screen"
+%w( screen ie print ).each do |stylesheet|
+  get "/stylesheets/#{stylesheet}.css" do
+    content_type 'text/css'
+    headers 'Expires' => (Time.now + 60*60*24*356*3).httpdate # Cache for 3 years
+    sass :"stylesheets/#{stylesheet}", { :sass => { :load_paths => ([ File.join(File.dirname(__FILE__), 'views', 'stylesheets') ] + Compass::Frameworks::ALL.map { |f| f.stylesheets_directory }) } }
+  end
 end
 
 get '/tickets/new' do
@@ -55,8 +59,6 @@ get '/tickets/new' do
 end
 
 post '/tickets' do
-  p params
-  
   success = Unfuddle.post_ticket(params)
   
   set_cookie('notice', success ? 'ticket_successful' : 'ticket_failed')

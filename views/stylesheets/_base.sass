@@ -1,0 +1,50 @@
+@import compass/reset.sass
+@import compass/utilities.sass
+@import blueprint.sass
+@import blueprint/modules/debug.sass
+
+=reset-blueprint-typography
+  body
+    :font-size 85%
+    th
+      :background inherit
+    tr.even td
+      :background inherit
+
+=has-menubar
+  #menubar
+    :width 100%
+    :background-color #2b2b2b
+    :border-bottom 1px solid #eee
+    :color #fff
+    a
+      :color #fff
+      :text-decoration none
+    #app-suite-links
+      :float left
+      +horizontal-list
+    #site-actions
+      :float right
+      +horizontal-list
+      
+=has-titlebar
+  #titlebar
+    :width 100%
+    :min-height 3em
+    :margin-bottom 1.5em
+    :background #279914 url(/images/body-bg.png) repeat-x
+    #header
+      +column(24)
+      :padding-top 1em
+      h1
+        :font-size 2em
+        :font-weight bold
+        :margin-bottom 0.75em
+        :color #fff
+        +column(24)
+        a
+          :text-decoration none
+          :color #fff
+
+h1
+  +header-text

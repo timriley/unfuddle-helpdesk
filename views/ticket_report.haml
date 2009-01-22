@@ -1,13 +1,26 @@
-%h1 Tickets
+#tickets
+  %h1 Helpdesk Tickets
 
-- @ticket_report['groups']['group'].each do |group|
-  %h2= h(group['title'])
-  
-  %table
-    - group['tickets']['ticket'].each do |ticket|
-      %tr
-        %td
-          %a{:href => "/tickets/#{h(ticket['number'])}"}= "##{h(ticket['number'])}"
-        %td
-          = h(ticket['summary'])        
-    
+  - @ticket_report['groups']['group'].each do |group|
+    .component
+      %h3= h(group['title'])
+      
+      %table
+        %thead
+          %tr
+            %th No.
+            %th Summary
+            %th Submitter
+        %tbody
+          - group['tickets']['ticket'].each do |ticket|
+            %tr{:class => cycle}
+              %td
+                %a{:href => "/tickets/#{h(ticket['number'])}"}= "##{h(ticket['number'])}"
+              %td
+                = h(ticket['summary'])
+              %td
+                Frank
+
+#sidebar
+  %p
+    %a{:href => '/tickets/new'} New ticket

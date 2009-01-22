@@ -1,3 +1,7 @@
 h1. unfuddle-mirror
 
 A Sinatra application that provides access to Unfuddle tickets without requiring a user account. Ideal for user access to helpdesk tickets.
+
+h1. Acknowledgements
+
+* Tim Lucas, for the helpers & other various tricks from "toolmantim.com":http://github.com/toolmantim/toolmantim/tree/master/toolmantim.rb
