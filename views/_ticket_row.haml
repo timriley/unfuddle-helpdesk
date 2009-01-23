@@ -1,0 +1,8 @@
+%td
+  %a{:href => "/tickets/#{h(ticket.number)}"}= "##{h(ticket.number)}"
+%td
+  = h(ticket.ticket_summary)
+%td
+  = h(ticket.reporter_name)
+%td
+  = h(ticket.assignee_name)

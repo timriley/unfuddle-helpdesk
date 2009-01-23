@@ -1,25 +1,26 @@
 #tickets
   %h1 Helpdesk Tickets
 
-  - @ticket_report['groups']['group'].each do |group|
+  - @ticket_report.ticket_groups.each do |group|
+  
     .component
-      %h3= h(group['title'])
+      %h3= h(group.title)
       
       %table
         %thead
           %tr
             %th No.
             %th Summary
-            %th Submitter
+            %th Reporter
+            %th Assignee
         %tbody
-          - group['tickets']['ticket'].each do |ticket|
+          - group.unassigned_tickets.each do |ticket|
+            %tr{:class => "unassigned #{cycle}"}
+              = partial('ticket_row', :locals => {:ticket => ticket})
+              
+          - group.assigned_tickets.each do |ticket|
             %tr{:class => cycle}
-              %td
-                %a{:href => "/tickets/#{h(ticket['number'])}"}= "##{h(ticket['number'])}"
-              %td
-                = h(ticket['summary'])
-              %td
-                Frank
+              = partial('ticket_row', :locals => {:ticket => ticket})
 
 #sidebar
   %p

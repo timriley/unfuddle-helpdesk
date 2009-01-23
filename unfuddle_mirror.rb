@@ -28,8 +28,8 @@ helpers do
   def versioned_js(js)
     "/javascripts/#{js}.js?" + File.mtime(File.join(Sinatra::Application.public, "javascripts", "#{js}.js")).to_i.to_s
   end
-  def partial(name)
-    haml(:"_#{name}", :layout => false)
+  def partial(name, options = {})
+    haml(:"_#{name}", options.merge!(:layout => false))
   end
   
   def cycle
