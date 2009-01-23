@@ -1,7 +1,19 @@
-%table
-  - @ticket.each_pair do |key, val|
-    %tr
-      %td
-        %strong= h(key)
-      %td
-        = h(val)
+#tickets
+  %h3= h(@ticket.ticket_summary)
+
+  %table
+    %thead
+      %tr
+        %th No.
+        %th Summary
+        %th Reporter
+        %th Assignee
+        %th Created ↓
+    %tbody
+      %tr{:class => 'odd'}
+        = partial('ticket_row', :locals => {:ticket => @ticket})
+  
+  %h4 Description
+  
+  %p.description
+    = convert_breaks(h(@ticket.description))

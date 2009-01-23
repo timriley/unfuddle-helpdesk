@@ -1,8 +1,10 @@
-%td
+%td{:nowrap => 'nowrap'}
   %a{:href => "/tickets/#{h(ticket.number)}"}= "##{h(ticket.number)}"
-%td
+%td{:width => '100%'}
   = h(ticket.ticket_summary)
-%td
+%td{:nowrap => 'nowrap'}
   = h(ticket.reporter_name)
-%td
+%td{:nowrap => 'nowrap'}
   = h(ticket.assignee_name)
+%td{:nowrap => 'nowrap'}
+  = ticket.ticket_created_at.strftime('%Y-%m-%d')

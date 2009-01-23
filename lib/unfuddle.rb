@@ -1,5 +1,8 @@
 require 'ostruct'
 
+
+
+
 # This method is needed for HTTParty to work properly
 # Extracted from http://github.com/wycats/merb-extlib/tree/master/lib/merb-extlib/string.rb
 class String
@@ -113,5 +116,16 @@ class Ticket < OpenStruct
   
   def ticket_summary
     self.summary.match(Ticket.delimiter) ? self.summary.split(Ticket.delimiter).last : self.summary
+  end
+  
+  # When loading a generated ticket report: <created-at type="datetime">2008-05-23T07:48:38+00:00</created-at>
+  # When loading a ticket on its own:       <created-at>2008-05-23T17:48:38+10:00</created-at>
+  # Ugh.
+  def ticket_created_at
+    if self.created_at.kind_of?(String)
+      Time.parse(self.created_at)
+    else
+      self.created_at
+    end
   end
 end

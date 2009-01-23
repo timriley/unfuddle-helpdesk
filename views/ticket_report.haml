@@ -13,6 +13,7 @@
             %th Summary
             %th Reporter
             %th Assignee
+            %th Created ↓
         %tbody
           - reset_cycle
           - group.unassigned_tickets.each do |ticket|
@@ -22,7 +23,7 @@
           - group.assigned_tickets.each do |ticket|
             %tr{:class => cycle}
               = partial('ticket_row', :locals => {:ticket => ticket})
-
-#sidebar
-  %p
-    %a{:href => '/tickets/new'} New ticket
+/ 
+/ #sidebar
+/   %p
+/     %a{:href => '/tickets/new'} New ticket

@@ -40,6 +40,10 @@ helpers do
   def reset_cycle
     @_cycle = %w(odd even)
   end
+  
+  def convert_breaks(str)
+    str.gsub("\n", "<br/>")
+  end
 end
 
 get '/' do
