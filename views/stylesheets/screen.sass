@@ -20,11 +20,14 @@ body#index
   #tickets
     +column(19)
     table
-      / +alternating-rows-and-columns(#bbff91,#ddffc8,#000)
-      +alternating-rows-and-columns(#f5f5f5,#ffffff,#000)
-      tr.unassigned
-        td
-          :background red
+      / for assigned tickets ('normal' table rows)
+      +alternating-rows-and-columns(#bbff91,#ddffc8,#000)
+      / +alternating-rows-and-columns(#f5f5f5,#ffffff,#000)
+      / alternating colors for unassigned tickets
+      tr.unassigned.even
+        :background #ffd4d4
+      tr.unassigned.odd
+        :background #ffeeee
       th
         :border-bottom 1px solid #666
         :background #f5f5f5
