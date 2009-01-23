@@ -106,6 +106,10 @@ class Ticket < OpenStruct
     ' --reported--> '
   end
   
+  def assigned?
+    !!self.assignee_id
+  end
+  
   def assignee_name
     Person.name_by_id(self.assignee_id)
   end

@@ -1,3 +1,21 @@
-- show a big fat number on the home page that shows how long since the oldest unassigned ticket has been submitted
-
 - display dates in "4 days ago" style
+
+- unassigned tickets that are still within the 24 hour period should be a neutral color (grey?)
+- only the unassigned tickets that are outside the 24 hour timeframe should be red
+
+- put a box around the ticket description when viewing a single ticket
+
+- clean up the view for submitting tickets
+ - need to allow select box for business area (component)
+ - use cookies to remember name and component
+ - use cookies for the flash[:notice] business
+
+- add a button to submit new tickets on the front page
+
+- show ticket comments in the view ticket page (& show how many comments there are per ticket in the index view)
+- provide a way for people to submit comments for a ticket
+
+
+Maybe no:
+
+- show the age of the oldest unassigned ticket (in relative time) on the front page

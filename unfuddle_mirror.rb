@@ -38,7 +38,7 @@ helpers do
     @_cycle.first
   end
   def reset_cycle
-    @_cycle = %w(odd even)
+    @_cycle = %w(even odd)
   end
   
   def convert_breaks(str)

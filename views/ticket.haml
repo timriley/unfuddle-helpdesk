@@ -10,7 +10,7 @@
         %th Assignee
         %th Created ↓
     %tbody
-      %tr{:class => 'odd'}
+      %tr{:class => "odd#{' unassigned' if !@ticket.assigned?}"}
         = partial('ticket_row', :locals => {:ticket => @ticket})
   
   %h4 Description
