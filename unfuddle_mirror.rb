@@ -7,6 +7,7 @@ gem 'haml', '~> 2.1'
 require 'haml'
 
 require 'yaml'
+require 'ostruct'
 require 'httparty'
 require 'net/http'
 require 'compass'
@@ -16,7 +17,9 @@ configure do
   enable :sessions
 end
 
-require File.join(File.dirname(__FILE__), 'lib', 'unfuddle')
+%w( unfuddle_client person ticket_report ticket_group ticket ).each do |lib|
+  require File.join(File.dirname(__FILE__), 'lib', lib)
+end
 
 helpers do
   include Rack::Utils
@@ -47,7 +50,7 @@ helpers do
 end
 
 get '/' do
-  @ticket_report = Unfuddle.get_ticket_report(Sinatra::Application.unfuddle_ticket_report_id)
+  @ticket_report = TicketReport.find(Sinatra::Application.unfuddle_ticket_report_id)
   haml :ticket_report
 end
 
@@ -64,13 +67,13 @@ get '/tickets/new' do
 end
 
 post '/tickets' do
-  success = Unfuddle.post_ticket(params)
+  success = Ticket.post_ticket(params)
   
   set_cookie('notice', success ? 'ticket_successful' : 'ticket_failed')
   redirect '/'
 end
 
 get '/tickets/:id' do
-  @ticket = Unfuddle.get_ticket(params[:id]) || raise(Sinatra::NotFound)
+  @ticket = Ticket.find(params[:id]) || raise(Sinatra::NotFound)
   haml :ticket
 end
