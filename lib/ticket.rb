@@ -5,19 +5,10 @@ class Ticket < OpenStruct
     new(get("https://#{Sinatra::Application.unfuddle_subdomain}.unfuddle.com/api/v1/projects/#{Sinatra::Application.unfuddle_project_id}/tickets/by_number/#{id}")['ticket'])
   end
   
-  # HTTParty doesn't like that this request returns a nil body. Let's do it manually for now.
-  def self.post_ticket(params)
-    http                = Net::HTTP.new("#{Sinatra::Application.unfuddle_subdomain}.unfuddle.com", 443)
-    http.use_ssl        = true
-    http.verify_mode    = OpenSSL::SSL::VERIFY_NONE
-
-    request             = Net::HTTP::Post.new("/api/v1/projects/#{Sinatra::Application.unfuddle_project_id}/tickets", {'Content-type' => 'application/xml'})
-    request.basic_auth  Sinatra::Application.unfuddle_username, Sinatra::Application.unfuddle_password
-    request.body        = "<ticket><priority>3</priority><summary>#{params[:name]}#{Ticket.delimiter}#{params[:summary]}</summary><description>#{params[:description]}</description></ticket>"
-    
-    response            = http.request(request)
-    
-    response.class == Net::HTTPCreated ? true : false
+  def self.create(attrs)
+    post( "https://#{Sinatra::Application.unfuddle_subdomain}.unfuddle.com/api/v1/projects/#{Sinatra::Application.unfuddle_project_id}/tickets",
+          :body => "<ticket><priority>3</priority><summary>#{attrs[:name]}#{delimiter}#{attrs[:summary]}</summary><description>#{attrs[:description]}</description></ticket>",
+          :headers => {'Content-type' => 'application/xml'})
   end
   
   def self.delimiter
