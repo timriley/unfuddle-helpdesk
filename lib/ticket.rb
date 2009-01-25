@@ -27,9 +27,14 @@ class Ticket < OpenStruct
   def initialize(hsh)
     super(hsh)
   end
-    
+  
   def assigned?
     !!self.assignee_id
+  end
+  
+  # Older than 24 hours and still unassigned
+  def out_of_bounds?
+    !assigned? && self.created_at < (Time.now - (1*24*60*60))
   end
   
   def assignee_name
