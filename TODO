@@ -1,5 +1,3 @@
-- try to use the real unfuddle reporter if there is no '--reported-->' string in the summary
-
 - put a box around the ticket description when viewing a single ticket
 
 - clean up the view for submitting tickets
@@ -23,3 +21,5 @@ DONE
 
 - unassigned tickets that are still within the 24 hour period should be a neutral color (grey?)
 - only the unassigned tickets that are outside the 24 hour timeframe should be red
+
+- try to use the real unfuddle reporter if there is no '--reported-->' string in the summary

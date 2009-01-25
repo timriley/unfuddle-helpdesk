@@ -38,11 +38,15 @@ class Ticket < OpenStruct
   end
   
   def assignee_name
-    Person.name_by_id(self.assignee_id)
+    Person.find(self.assignee_id).first_name
   end
   
   def reporter_name
-    self.summary.match(Ticket.delimiter) ? self.summary.split(Ticket.delimiter).first : 'Unknown'
+    if self.summary.match(Ticket.delimiter)
+      self.summary.split(Ticket.delimiter).first
+    else
+      Person.find(self.reporter_id).first_name
+    end
   end
   
   def ticket_summary
