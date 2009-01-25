@@ -1,5 +1,3 @@
-- display dates in "4 days ago" style
-
 - unassigned tickets that are still within the 24 hour period should be a neutral color (grey?)
 - only the unassigned tickets that are outside the 24 hour timeframe should be red
 
@@ -19,3 +17,7 @@
 Maybe no:
 
 - show the age of the oldest unassigned ticket (in relative time) on the front page
+
+DONE
+
+- display dates in "4 days ago" style

@@ -7,4 +7,4 @@
 %td{:nowrap => 'nowrap'}
   = h(ticket.assignee_name)
 %td{:nowrap => 'nowrap'}
-  = ticket.ticket_created_at.strftime('%Y-%m-%d')
+  = relative_time(ticket.ticket_updated_at)

@@ -47,12 +47,12 @@ class Ticket < OpenStruct
   # When loading a generated ticket report: <created-at type="datetime">2008-05-23T07:48:38+00:00</created-at>
   # When loading a ticket on its own:       <created-at>2008-05-23T17:48:38+10:00</created-at>
   # Ugh.
-  %w(created_at updated_at).each do
-    def ticket_created_at
-      if self.created_at.kind_of?(String)
-        Time.parse(self.created_at)
+  [:created_at, :updated_at].each do |time|
+    define_method :"ticket_#{time}" do
+      if self.send(time).kind_of?(String)
+        Time.parse(self.send(time))
       else
-        self.created_at
+        self.send(time)
       end
     end
   end

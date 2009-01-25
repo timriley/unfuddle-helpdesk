@@ -31,10 +31,10 @@ helpers do
   def versioned_js(js)
     "/javascripts/#{js}.js?" + File.mtime(File.join(Sinatra::Application.public, "javascripts", "#{js}.js")).to_i.to_s
   end
+  
   def partial(name, options = {})
     haml(:"_#{name}", options.merge!(:layout => false))
   end
-  
   def cycle
     @_cycle ||= reset_cycle
     @_cycle = [@_cycle.pop] + @_cycle
@@ -43,9 +43,12 @@ helpers do
   def reset_cycle
     @_cycle = %w(even odd)
   end
-  
   def convert_breaks(str)
     str.gsub("\n", "<br/>")
+  end
+  def relative_time(time)
+    days_ago = (Time.now - time).to_i / (60*60*24)
+    "#{days_ago} day#{'s' if days_ago != 1} ago"
   end
 end
 
