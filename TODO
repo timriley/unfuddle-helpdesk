@@ -1,7 +1,7 @@
-- put a box around the ticket description when viewing a single ticket
-
 - show ticket comments in the view ticket page (& show how many comments there are per ticket in the index view)
+
 - provide a way for people to submit comments for a ticket
+  - comments will need to have the submitted name at the front of the body, separated by a delimiter, just like the tickets.
 
 Maybe no:
 
@@ -24,3 +24,9 @@ DONE
 - html escape the data that is submitted in new ticket
 
 - add a button to submit new tickets on the front page
+
+- put a box around the ticket description when viewing a single ticket
+
+- fix the "-1 days ago" prob
+
+- fix the blank assignee prob

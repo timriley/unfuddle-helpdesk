@@ -24,7 +24,13 @@ class Ticket < OpenStruct
   end
   
   def initialize(hsh)
-    super(hsh)
+    super(hsh.merge(:ticket_id => hsh['id']))
+  end
+  
+  def comments
+    @comments ||= self.class.get(
+      "https://#{Sinatra::Application.unfuddle_subdomain}.unfuddle.com/api/v1/projects/#{Sinatra::Application.unfuddle_project_id}/tickets/#{self.ticket_id}/comments"
+    )['comments'].map { |c| Comment.new(c) }
   end
   
   def assigned?
@@ -37,7 +43,7 @@ class Ticket < OpenStruct
   end
   
   def assignee_name
-    Person.find(self.assignee_id).first_name
+    Person.find(self.assignee_id).first_name || 'No one yet'
   end
   
   def reporter_name

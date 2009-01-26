@@ -8,7 +8,7 @@
         %th Summary
         %th Reporter
         %th Assignee
-        %th Created ↓
+        %th Updated
     %tbody
       %tr{:class => "odd#{' unassigned' if !@ticket.assigned?}"}
         = partial('ticket_row', :locals => {:ticket => @ticket})
@@ -17,3 +17,19 @@
   
   %p.description
     = convert_breaks(h(@ticket.description))
+    
+  %h4 Comments
+  
+  - @ticket.comments.each_with_index do |comment, index|
+    .comment
+      .header
+        %span.name
+          = h(comment.commenter_name)
+        %span.date
+          = relative_time(comment.comment_created_at)
+      .body
+        %p
+          = convert_breaks(h(comment.body))
+      
+
+  

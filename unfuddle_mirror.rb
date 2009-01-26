@@ -17,7 +17,7 @@ configure do
   enable :sessions
 end
 
-%w( unfuddle_client person ticket_report ticket_group ticket ).each do |lib|
+%w( unfuddle_client person ticket_report ticket_group ticket comment ).each do |lib|
   require File.join(File.dirname(__FILE__), 'lib', lib)
 end
 
@@ -51,6 +51,7 @@ helpers do
   end
   def relative_time(time)
     days_ago = (Time.now - time).to_i / (60*60*24)
+    days_ago = 0 if days_ago < 0
     "#{days_ago} day#{'s' if days_ago != 1} ago"
   end
 end
