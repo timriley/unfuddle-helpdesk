@@ -1,7 +1,5 @@
 - put a box around the ticket description when viewing a single ticket
 
-- add a button to submit new tickets on the front page
-
 - show ticket comments in the view ticket page (& show how many comments there are per ticket in the index view)
 - provide a way for people to submit comments for a ticket
 
@@ -25,4 +23,5 @@ DONE
  - use cookies for the flash[:notice] business
  
 - html escape the data that is submitted in new ticket
- 
+
+- add a button to submit new tickets on the front page

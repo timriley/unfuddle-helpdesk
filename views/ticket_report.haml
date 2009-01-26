@@ -6,7 +6,12 @@
     .error
       Error adding your ticket. Please try again or contact IT.
   
-  %h1 Helpdesk Tickets
+  / Ideally this goes in a 'before_filter' in the actual app.
+  - clear_cookie('notice')
+  
+  %h1
+    Helpdesk Tickets
+    (<a href='/tickets/new'>add yours</a>)
 
   - @ticket_report.ticket_groups.each do |group|
   
@@ -30,7 +35,3 @@
           - group.assigned_tickets.each do |ticket|
             %tr{:class => cycle}
               = partial('ticket_row', :locals => {:ticket => ticket})
-
-/ #sidebar
-/   %p
-/     %a{:href => '/tickets/new'} New ticket

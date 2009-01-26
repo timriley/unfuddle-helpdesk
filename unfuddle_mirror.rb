@@ -35,6 +35,9 @@ helpers do
   def partial(name, options = {})
     haml(:"_#{name}", options.merge!(:layout => false))
   end
+  def clear_cookie(name)
+    response.set_cookie(name, nil)
+  end
   def cycle
     @_cycle ||= reset_cycle
     @_cycle = [@_cycle.pop] + @_cycle
