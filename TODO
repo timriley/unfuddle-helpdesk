@@ -3,7 +3,6 @@
 - show ticket comments in the view ticket page (& show how many comments there are per ticket in the index view)
 - provide a way for people to submit comments for a ticket
 
-
 Maybe no:
 
 - show the age of the oldest unassigned ticket (in relative time) on the front page

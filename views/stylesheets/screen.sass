@@ -25,34 +25,30 @@ body#index
     :padding .8em
     :margin-bottom 1em
   #tickets
-    +column(24)
-    table
-      / for assigned tickets (the 'normal' table rows)
-      +alternating-rows-and-columns(#bbff91,#ddffc8,#000)
-      / alternating colors for unassigned tickets
-      tr.unassigned.odd
-        :background #f5f5f5
-      tr.unassigned.even
-        :background #ffffff
-      tr.out-of-bounds.odd
-        :background #ffd4d4
-      tr.out-of-bounds.even
-        :background #ffeeee
-      th
-        :border-bottom 1px solid #666
-        :background #f5f5f5
-      td,th
-        :vertical-align top
-        :padding-left 0.5em
-        :padding-right 0.5em
-  #sidebar
-    +column(5,true)
-    #ticket-age
-      :font-size 3em
-      :line-height 1
-      :margin-bottom 0.5em
-      :font-weight bold
-      :color red
+    +column(24, true)
+  #ticket
+    +column(24, true)
+    .description
+      :background #f5f5f5
+  table.tickets
+    / for assigned tickets (the 'normal' table rows)
+    +alternating-rows-and-columns(#bbff91,#ddffc8,#000)
+    / alternating colors for unassigned tickets
+    tr.unassigned.odd
+      :background #f5f5f5
+    tr.unassigned.even
+      :background #ffffff
+    tr.out-of-bounds.odd
+      :background #ffd4d4
+    tr.out-of-bounds.even
+      :background #ffeeee
+    th
+      :border-bottom 1px solid #666
+      :background #f5f5f5
+    td,th
+      :vertical-align top
+      :padding-left 0.5em
+      :padding-right 0.5em
   #new-ticket
     +column(18, true)
     +append(6)
