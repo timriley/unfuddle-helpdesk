@@ -1,9 +1,6 @@
+- html escape the data that is submitted in new ticket
+ 
 - put a box around the ticket description when viewing a single ticket
-
-- clean up the view for submitting tickets
- - need to allow select box for business area (component)
- - use cookies to remember name and component
- - use cookies for the flash[:notice] business
 
 - add a button to submit new tickets on the front page
 
@@ -23,3 +20,8 @@ DONE
 - only the unassigned tickets that are outside the 24 hour timeframe should be red
 
 - try to use the real unfuddle reporter if there is no '--reported-->' string in the summary
+
+- clean up the view for submitting tickets
+ - need to allow select box for business area (component)
+ - use cookies to remember name and component
+ - use cookies for the flash[:notice] business

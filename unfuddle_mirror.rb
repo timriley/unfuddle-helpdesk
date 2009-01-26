@@ -70,9 +70,15 @@ get '/tickets/new' do
 end
 
 post '/tickets' do
-  success = Ticket.post_ticket(params)
+  response.set_cookie('name', params[:name])
+  response.set_cookie('component_id', params[:component_id])
   
-  set_cookie('notice', success ? 'ticket_successful' : 'ticket_failed')
+  begin
+    Ticket.create(params)
+    response.set_cookie('notice', 'ticket_success')
+  rescue Net::HTTPServerException
+    response.set_cookie('notice', 'ticket_error')
+  end
   redirect '/'
 end
 

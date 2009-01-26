@@ -1,15 +1,49 @@
-%form{:action => '/tickets', :method => 'post'}
-  %label{:for => 'name'} Name
-  %br/
-  %input{:type => 'text', :name => 'name'}/
-  %br/
-  %label{:for => 'summary'} Summary
-  %br/
-  %input{:type => 'text', :name => 'summary'}/
-  %br/
-  %label{:for => 'description'} Description
-  %br/
-  %textarea{:name => 'desciption'}
-  %br/
-  %input{:type => 'submit', :value => 'Submit'}/
+#new-ticket
+  %h1 Submit an Issue
+
+  %form{:action => '/tickets', :method => 'post'}
   
+    %h3 Your Details
+    .new-ticket-fields
+      %fieldset
+        .field
+          %label{:for => 'name'} Name
+          %input{:type => 'text', :name => 'name', :value => request.cookies['name']}/
+        .field
+          %label{:for => 'component_id'} Section
+          %select{:name => 'component_id'}
+            - Sinatra::Application.unfuddle_components.each do |component|
+              - if request.cookies['component_id'].to_i == component[0].to_i
+                %option{:value => component[0], :selected => 'selected'}= h(component[1])
+              - else
+                %option{:value => component[0]}= h(component[1])
+    .new-ticket-help
+      .help
+        %p
+          We'll remember these details for next time.
+          
+    %h3 Your Issue
+    .new-ticket-fields       
+      %fieldset
+        .field
+          %label{:for => 'summary'} Summary
+          %input{:type => 'text', :name => 'summary'}/
+        .field
+          %label{:for => 'description'} Description
+          %textarea{:name => 'desciption'}
+    .new-ticket-help
+      .help
+        %p
+          Provide a descriptive summary and include as much information as possible in the description. This will help us address the issue faster.
+      .help
+        %p
+          If you need to provide screenshots or images, please <a href="mailto:helpdesk@amc.org.au">email helpdesk</a> with the images attached.
+
+    %h3 All Done?
+    .new-ticket-fields
+      %fieldset.submit
+        %p
+          Thanks for letting us know about your issue. We'll do our best to get back to you within 24 hours.
+        %p
+          If your issue is urgent, please escalate it to the IT Manager by phone after submitting it here.
+        %input{:type => 'submit', :value => 'Submit'}/

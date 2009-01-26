@@ -1,4 +1,11 @@
 #tickets
+  - if request.cookies['notice'] == 'ticket_success'
+    .success
+      Ticket added successfully.
+  - elsif request.cookies['notice'] == 'ticket_error'
+    .error
+      Error adding your ticket. Please try again or contact IT.
+  
   %h1 Helpdesk Tickets
 
   - @ticket_report.ticket_groups.each do |group|
@@ -23,7 +30,7 @@
           - group.assigned_tickets.each do |ticket|
             %tr{:class => cycle}
               = partial('ticket_row', :locals => {:ticket => ticket})
-/ 
+
 / #sidebar
 /   %p
 /     %a{:href => '/tickets/new'} New ticket

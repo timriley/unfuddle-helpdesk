@@ -6,8 +6,16 @@ class Ticket < OpenStruct
   end
   
   def self.create(attrs)
+    attrs = prepare_attributes(attrs)
+    
     post( "https://#{Sinatra::Application.unfuddle_subdomain}.unfuddle.com/api/v1/projects/#{Sinatra::Application.unfuddle_project_id}/tickets",
-          :body => "<ticket><priority>3</priority><summary>#{attrs[:name]}#{delimiter}#{attrs[:summary]}</summary><description>#{attrs[:description]}</description></ticket>",
+          :body => "
+            <ticket>
+              <priority>3</priority>
+              <component-id>#{attrs[:component_id]}</component-id>
+              <summary>#{attrs[:name]}#{delimiter}#{attrs[:summary]}</summary>
+              <description>#{attrs[:description]}</description>
+            </ticket>",
           :headers => {'Content-type' => 'application/xml'})
   end
   
@@ -55,5 +63,13 @@ class Ticket < OpenStruct
         self.send(time)
       end
     end
+  end
+  
+  private
+  
+  def self.prepare_attributes(attrs)
+    attrs[:name].capitalize!
+    attrs[:summary].capitalize!
+    attrs
   end
 end
