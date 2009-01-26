@@ -1,5 +1,3 @@
-- html escape the data that is submitted in new ticket
- 
 - put a box around the ticket description when viewing a single ticket
 
 - add a button to submit new tickets on the front page
@@ -25,3 +23,6 @@ DONE
  - need to allow select box for business area (component)
  - use cookies to remember name and component
  - use cookies for the flash[:notice] business
+ 
+- html escape the data that is submitted in new ticket
+ 
