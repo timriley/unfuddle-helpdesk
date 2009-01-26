@@ -64,7 +64,7 @@ end
 %w( screen ie print ).each do |stylesheet|
   get "/stylesheets/#{stylesheet}.css" do
     content_type 'text/css'
-    headers 'Expires' => (Time.now + 60*60*24*356*3).httpdate # Cache for 3 years
+    response['Expires'] = (Time.now + 60*60*24*356*3).httpdate # Cache for 3 years
     sass :"stylesheets/#{stylesheet}", { :sass => { :load_paths => ([ File.join(File.dirname(__FILE__), 'views', 'stylesheets') ] + Compass::Frameworks::ALL.map { |f| f.stylesheets_directory }) } }
   end
 end

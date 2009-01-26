@@ -1,5 +1,3 @@
-- show ticket comments in the view ticket page (& show how many comments there are per ticket in the index view)
-
 - provide a way for people to submit comments for a ticket
   - comments will need to have the submitted name at the front of the body, separated by a delimiter, just like the tickets.
 
@@ -30,3 +28,5 @@ DONE
 - fix the "-1 days ago" prob
 
 - fix the blank assignee prob
+
+- show ticket comments in the view ticket page (& show how many comments there are per ticket in the index view)
