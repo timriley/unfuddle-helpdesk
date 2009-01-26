@@ -68,8 +68,13 @@ class Ticket < OpenStruct
   private
   
   def self.prepare_attributes(attrs)
-    attrs[:name].capitalize!
     attrs[:summary].capitalize!
+
+    # Strip tags
+    [:name, :summary, :description].each do |attr|
+      attrs[attr].gsub!(/<\/?[^>]*>/, "")
+    end
+    
     attrs
   end
 end
