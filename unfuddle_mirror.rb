@@ -6,11 +6,13 @@ require 'sinatra'
 gem 'haml', '~> 2.1'
 require 'haml'
 
+gem 'chriseppstein-compass'
+require 'compass'
+
 require 'yaml'
 require 'ostruct'
 require 'httparty'
 require 'net/http'
-require 'compass'
 
 configure do
   require File.join(File.dirname(__FILE__), 'app_config')

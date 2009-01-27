@@ -1,7 +1,7 @@
-ENV['TZ'] = 'Australia/Sydney'
+ENV['TZ'] = 'Australia/Canberra'
 
 require 'rubygems'
-gem 'sinatra', '~> 0.3'
+gem 'sinatra', '~> 0.9'
 require 'sinatra'
 
 set :run      => false,
@@ -9,8 +9,8 @@ set :run      => false,
     :root     => File.dirname(__FILE__),
     :views    => File.dirname(__FILE__) + "/views",
     :public   => File.dirname(__FILE__) + "/public",
-    :app_file => "unfuddle-mirror.rb"
+    :app_file => "unfuddle_mirror.rb"
 
-require File.join(File.dirname(__FILE__), "unfuddle-mirror.rb")
+require File.join(File.dirname(__FILE__), "unfuddle_mirror.rb")
 
-run Sinatra.application
+run Sinatra::Application
