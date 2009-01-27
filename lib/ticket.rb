@@ -30,7 +30,7 @@ class Ticket < OpenStruct
   def comments
     @comments ||= self.class.get(
       "https://#{Sinatra::Application.unfuddle_subdomain}.unfuddle.com/api/v1/projects/#{Sinatra::Application.unfuddle_project_id}/tickets/#{self.ticket_id}/comments"
-    )['comments'].map { |c| Comment.new(c) }
+    )['comments'].to_a.map { |c| Comment.new(c) }
   end
   
   def assigned?
