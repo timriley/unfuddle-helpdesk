@@ -1,7 +1,6 @@
 @import base.sass
 
-+blueprint-typography
-+reset-blueprint-typography
++typography-defaults
 
 a
   :color #418DBA
@@ -32,14 +31,14 @@ body#index
     h1
       +column(18)
     #buttons
-      +column(6, last)
+      +column(6, true)
       ul
         :margin 0
         :padding 0
       li
-        :list-style-image = none
-        :list-style-position = outside
-        :list-style-type = none
+        :list-style-image none
+        :list-style-position outside
+        :list-style-type none
         :float right
         :background url('/images/new_ticket_rollover.png') no-repeat left top
         :margin 0

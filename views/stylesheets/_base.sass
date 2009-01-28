@@ -3,13 +3,14 @@
 @import blueprint.sass
 @import blueprint/modules/interaction.sass
 
-=reset-blueprint-typography
+=typography-defaults
+  +blueprint-typography
   body
     :font-size 85%
     th
-      :background inherit
+      :background #fff
     tr.even td
-      :background inherit
+      :background #fff
 
 =has-menubar
   #menubar
