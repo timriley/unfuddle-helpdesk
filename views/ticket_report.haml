@@ -1,3 +1,5 @@
+- @title = 'All Tickets'
+
 #tickets
   - if request.cookies['notice'] == 'ticket_success'
     .success
@@ -19,7 +21,7 @@
   - @ticket_report.ticket_groups.each do |group|
   
     .component
-      %h3= h(group.title)
+      %h3= "#{h(group.title)} (#{group.tickets.length})"
       
       %table.tickets{ :cellpadding => 0, :cellspacing => 0 }
         %thead
