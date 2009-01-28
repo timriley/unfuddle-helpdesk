@@ -1,15 +1,25 @@
 @import compass/reset.sass
 @import compass/utilities.sass
-@import blueprint.sass
-@import blueprint/modules/interaction.sass
 
-=reset-blueprint-typography
-  body
-    :font-size 85%
-    th
-      :background inherit
-    tr.even td
-      :background inherit
+// All the blueprint stuff, MINUS typography, which we handle manually.
+// These are all taken from the top of blueprint/screen.sass
+@import blueprint/modules/colors.sass
+@import blueprint/modules/grid.sass
+@import blueprint/modules/utilities.sass
+@import blueprint/modules/form.sass
+@import blueprint/modules/interaction.sass
+@import blueprint/modules/debug.sass
+
+@import blueprint/print.sass
+@import blueprint/ie.sass
+
+// Our stuff
+@import typography.sass
+
++blueprint-typography
+
+body
+  :font-size 85%
 
 =has-menubar
   #menubar
@@ -44,6 +54,3 @@
         a
           :text-decoration none
           :color #fff
-
-h1
-  +header-text
