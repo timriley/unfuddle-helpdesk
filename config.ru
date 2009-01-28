@@ -11,6 +11,6 @@ set :run      => false,
     :public   => File.dirname(__FILE__) + "/public",
     :app_file => "unfuddle_mirror.rb"
 
-require File.join(File.dirname(__FILE__), "unfuddle_mirror.rb")
+require File.join(File.dirname(__FILE__), "unfuddle_helpdesk.rb")
 
 run Sinatra::Application
