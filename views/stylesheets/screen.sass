@@ -26,6 +26,36 @@ body#index
     :margin-bottom 1em
   #tickets
     +column(24, true)
+    h1
+      +column(18)
+    #buttons
+      +column(6, last)
+      ul
+        :margin 0
+        :padding 0
+      li
+        :list-style-image = none
+        :list-style-position = outside
+        :list-style-type = none
+        :float right
+        :background url('/images/new_ticket_rollover.png') no-repeat left top
+        :margin 0
+        :padding 0
+        :width 140px
+        :height 54px
+      a
+        :float right
+        :display block
+        :background url('/images/new_ticket_rollover.png') no-repeat left top
+        :width 140px
+        :height 54px
+      li:hover, li:hover a
+        :background-position 0% -54px
+      li:hover a
+        :background-position 100% -54px
+      span
+        :display none
+      
   #ticket
     +column(24, true)
     .description
