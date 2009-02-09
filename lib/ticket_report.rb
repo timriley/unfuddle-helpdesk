@@ -8,6 +8,6 @@ class TicketReport
   attr_accessor :ticket_groups
   
   def initialize(hsh)
-    @ticket_groups = hsh['groups']['group'].map { |g| TicketGroup.new(g) }
+    @ticket_groups = hsh['groups'].map { |g| TicketGroup.new(g) }
   end
 end

@@ -3,7 +3,7 @@ class TicketGroup
   
   def initialize(hsh)
     @title    = hsh['title']
-    @tickets  = (hsh['tickets']['ticket'].kind_of?(Array) ? hsh['tickets']['ticket'] : [hsh['tickets']['ticket']]).map { |t| Ticket.new(t) }
+    @tickets  = (hsh['tickets'].kind_of?(Array) ? hsh['tickets'] : [hsh['tickets']]).map { |t| Ticket.new(t) }
   end
   
   def title
