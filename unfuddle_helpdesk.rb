@@ -6,17 +6,25 @@ require 'sinatra'
 gem 'haml', '~> 2.1'
 require 'haml'
 
-gem 'chriseppstein-compass'
+gem 'chriseppstein-compass', '~> 0.4'
 require 'compass'
+
+# gem 'timriley-httparty'
+# require 'httparty'
+require '../httparty/lib/httparty'
 
 require 'yaml'
 require 'ostruct'
-require 'httparty'
 require 'net/http'
 
 configure do
   require File.join(File.dirname(__FILE__), 'app_config')
   enable :sessions
+  
+  Compass.configuration do |config|
+    config.project_path = File.dirname(__FILE__)
+    config.sass_dir     = File.join('views', 'stylesheets')
+  end
 end
 
 %w( unfuddle_client person ticket_report ticket_group ticket comment ).each do |lib|
@@ -67,7 +75,7 @@ end
   get "/stylesheets/#{stylesheet}.css" do
     content_type 'text/css'
     response['Expires'] = (Time.now + 60*60*24*356*3).httpdate # Cache for 3 years
-    sass :"stylesheets/#{stylesheet}", { :sass => { :load_paths => ([ File.join(File.dirname(__FILE__), 'views', 'stylesheets') ] + Compass::Frameworks::ALL.map { |f| f.stylesheets_directory }) } }
+    sass :"stylesheets/#{stylesheet}", :sass => Compass.sass_engine_options
   end
 end
 
