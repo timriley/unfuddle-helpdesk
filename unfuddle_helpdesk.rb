@@ -64,6 +64,10 @@ helpers do
   end
 end
 
+before do
+  clear_cookie('notice')
+end
+
 get '/' do
   @ticket_report = TicketReport.find(Sinatra::Application.unfuddle_ticket_report_id)
   haml :ticket_report
