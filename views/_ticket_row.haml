@@ -1,10 +1,10 @@
 %td{:nowrap => 'nowrap'}
   %a{:href => "/tickets/#{h(ticket.number)}"}= "##{h(ticket.number)}"
 %td{:width => '100%'}
-  = h(ticket.ticket_summary)
+  = h(ticket.summary)
 %td{:nowrap => 'nowrap'}
   = h(ticket.reporter_name)
 %td{:nowrap => 'nowrap'}
   = h(ticket.assignee_name)
 %td{:nowrap => 'nowrap'}
-  = relative_time(ticket.ticket_updated_at)
+  = relative_time(ticket.updated_at)

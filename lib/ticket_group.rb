@@ -1,13 +1,13 @@
-class TicketGroup
+class TicketGroup < UnfuddleRecord
   attr_accessor :tickets
   
   def initialize(hsh)
-    @title    = hsh['title']
     @tickets  = (hsh['tickets'].kind_of?(Array) ? hsh['tickets'] : [hsh['tickets']]).map { |t| Ticket.new(t) }
+    super({:title => hsh['title']})
   end
   
   def title
-    @title == '<none>' ? 'Ungrouped' : @title
+    @attributes.title == '<none>' ? 'Ungrouped' : @attributes.title
   end
   
   def unassigned_tickets

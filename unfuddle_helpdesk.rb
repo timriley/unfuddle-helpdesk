@@ -9,9 +9,9 @@ require 'haml'
 gem 'chriseppstein-compass', '~> 0.4'
 require 'compass'
 
-# gem 'timriley-httparty'
-# require 'httparty'
-require '../httparty/lib/httparty'
+# Require my fork of httparty until my fix for empty XML bodies is pulled upstream
+gem 'timriley-httparty'
+require 'httparty'
 
 require 'yaml'
 require 'ostruct'
@@ -27,7 +27,7 @@ configure do
   end
 end
 
-%w( unfuddle_client person ticket_report ticket_group ticket comment ).each do |lib|
+%w( core_extensions unfuddle_client person ticket_report ticket_group ticket comment ).each do |lib|
   require File.join(File.dirname(__FILE__), 'lib', lib)
 end
 
@@ -49,12 +49,10 @@ helpers do
     response.set_cookie(name, nil)
   end
   def cycle
-    @_cycle ||= reset_cycle
-    @_cycle = [@_cycle.pop] + @_cycle
-    @_cycle.first
+    %w{odd even}[@_cycle = ((@_cycle || -1) + 1) % 2]
   end
   def reset_cycle
-    @_cycle = %w(even odd)
+    @_cycle = 1
   end
   def convert_breaks(str)
     str.gsub("\n", "<br/>")
@@ -86,13 +84,8 @@ end
 post '/tickets' do
   response.set_cookie('name', params[:name])
   response.set_cookie('component_id', params[:component_id])
-  
-  begin
-    Ticket.create(params)
-    response.set_cookie('notice', 'ticket_success')
-  rescue Net::HTTPServerException
-    response.set_cookie('notice', 'ticket_error')
-  end
+
+  response.set_cookie('notice', Ticket.create(params).created? ? 'ticket_success' : 'ticket_error')
   redirect '/'
 end
 

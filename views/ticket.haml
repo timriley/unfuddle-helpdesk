@@ -1,7 +1,7 @@
-- @title = @ticket.ticket_summary
+- @title = @ticket.summary
 
 #ticket
-  %h3= h(@ticket.ticket_summary)
+  %h3= h(@ticket.summary)
 
   %table.tickets{ :cellpadding => 0, :cellspacing => 0 }
     %thead
@@ -28,7 +28,7 @@
         %span.name
           = h(comment.commenter_name)
         %span.date
-          = relative_time(comment.comment_created_at)
+          = relative_time(comment.created_at)
       .body
         %p
           = convert_breaks(h(comment.body))
