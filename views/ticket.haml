@@ -2,18 +2,38 @@
 
 #ticket
   %h3= h(@ticket.summary)
-
-  %table.tickets{ :cellpadding => 0, :cellspacing => 0 }
-    %thead
-      %tr
-        %th No.
-        %th Summary
-        %th Reporter
-        %th Assignee
-        %th Updated
+  
+  - reset_cycle
+  
+  %table.ticket_info{:cellpadding => 0, :cellspacing => 0}
     %tbody
-      %tr{:class => "odd#{' unassigned' if !@ticket.assigned?}"}
-        = partial('ticket_row', :locals => {:ticket => @ticket})
+      %tr{:class => "#{@ticket.out_of_bounds? ? 'out-of-bounds ' : (!@ticket.assigned? ? 'unassigned ' : nil)}#{cycle}"}
+        %th
+          No.
+        %td
+          = "##{h(@ticket.number)}"
+      %tr{:class => "#{@ticket.out_of_bounds? ? 'out-of-bounds ' : (!@ticket.assigned? ? 'unassigned ' : nil)}#{cycle}"}
+        %th
+          Reporter
+        %td
+          = h(@ticket.reporter_name)
+      %tr{:class => "#{@ticket.out_of_bounds? ? 'out-of-bounds ' : (!@ticket.assigned? ? 'unassigned ' : nil)}#{cycle}"}
+        %th
+          Assignee
+        %td
+          = h(@ticket.assignee_name)
+      %tr{:class => "#{@ticket.out_of_bounds? ? 'out-of-bounds ' : (!@ticket.assigned? ? 'unassigned ' : nil)}#{cycle}"}
+        %th
+          Due
+        %td
+          - if @ticket.due_on
+            = relative_date(@ticket.due_on)
+            = "(#{@ticket.due_on.to_s})"
+      %tr{:class => "#{@ticket.out_of_bounds? ? 'out-of-bounds ' : (!@ticket.assigned? ? 'unassigned ' : nil)}#{cycle}"}
+        %th
+          Updated
+        %td
+          = relative_date(@ticket.updated_at.to_s)
   
   %h4 Description
   
@@ -28,7 +48,7 @@
         %span.name
           = h(comment.commenter_name)
         %span.date
-          = relative_time(comment.created_at)
+          = relative_date(comment.created_at.to_s)
       .body
         %p
           = convert_breaks(h(comment.body))

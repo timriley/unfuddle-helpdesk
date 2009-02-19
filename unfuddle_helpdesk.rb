@@ -57,10 +57,19 @@ helpers do
   def convert_breaks(str)
     str.gsub("\n", "<br/>")
   end
-  def relative_time(time)
-    days_ago = (Time.now - time).to_i / (60*60*24)
-    days_ago = 0 if days_ago < 0
-    "#{days_ago} day#{'s' if days_ago != 1} ago"
+  def relative_date(date)
+    date = Date.parse(date, true) unless /Date.*/ =~ date.class.to_s
+    days = (date - Date.today).to_i
+
+    return 'Today'     if days >= 0 and days < 1
+    return 'Tomorrow'  if days >= 1 and days < 2
+    return 'Yesterday' if days >= -1 and days < 0
+
+    return "In #{days} days"      if days.abs < 60 and days > 0
+    return "#{days.abs} days ago" if days.abs < 60 and days < 0
+
+    return date.strftime('%A, %B %e') if days.abs < 182
+    return date.strftime('%A, %B %e, %Y')
   end
 end
 

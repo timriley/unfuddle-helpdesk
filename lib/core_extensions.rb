@@ -19,3 +19,9 @@ class String
       downcase
   end
 end
+
+class Date
+  def to_time(form = :local)
+    Time.mktime(year, month, day)
+  end
+end

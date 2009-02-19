@@ -54,3 +54,34 @@ body
         a
           :text-decoration none
           :color #fff
+
+// Copied from the compass source so that we can remove anything not associated with the colours
+=alternating-rows-and-columns(!even_row_color, !odd_row_color, !dark_intersection)
+  thead
+    th.even
+      :background-color= #fff - !dark_intersection
+  tfoot
+    td.even
+      :background-color= #fff - !dark_intersection
+  tr.odd
+    :background-color= !odd_row_color
+    td.even
+      :background-color= !odd_row_color - !dark_intersection
+  tr.even
+    :background-color= !even_row_color
+    td.even
+      :background-color= !even_row_color - !dark_intersection
+
+
+=row-colours-for-ticket-states
+  / for assigned tickets (the 'normal' table rows)
+  +alternating-rows-and-columns(#ddffc8,#bbff91,#000)
+  / alternating colors for unassigned tickets
+  tr.unassigned.odd
+    :background #f5f5f5
+  tr.unassigned.even
+    :background #ffffff
+  tr.out-of-bounds.odd
+    :background #ffd4d4
+  tr.out-of-bounds.even
+    :background #ffeeee
