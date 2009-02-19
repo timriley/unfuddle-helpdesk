@@ -38,5 +38,5 @@
               = partial('ticket_row', :locals => {:ticket => ticket})
               
           - group.assigned_tickets.each do |ticket|
-            %tr{:class => cycle}
+            %tr{:class => "#{'out-of-bounds ' if ticket.out_of_bounds?}#{cycle}"}
               = partial('ticket_row', :locals => {:ticket => ticket})
