@@ -1,6 +1,7 @@
 ENV['TZ'] = 'Australia/Canberra'
 
 require 'rubygems'
+
 gem 'sinatra', '~> 0.9'
 require 'sinatra'
 
