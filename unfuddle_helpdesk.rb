@@ -68,8 +68,8 @@ helpers do
     return "In #{days} days"      if days.abs < 60 and days > 0
     return "#{days.abs} days ago" if days.abs < 60 and days < 0
 
-    return date.strftime('%A, %B %e') if days.abs < 182
-    return date.strftime('%A, %B %e, %Y')
+    return date.strftime('%B %e') if days.abs < 182
+    return date.strftime('%B %e, %Y')
   end
 end
 
