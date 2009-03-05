@@ -45,9 +45,6 @@ helpers do
   def partial(name, options = {})
     haml(:"_#{name}", options.merge!(:layout => false))
   end
-  def clear_cookie(name)
-    response.set_cookie(name, nil)
-  end
   def cycle
     %w{odd even}[@_cycle = ((@_cycle || -1) + 1) % 2]
   end
@@ -74,7 +71,7 @@ helpers do
 end
 
 before do
-  clear_cookie('notice')
+  set_cookie('notice', {:path => '/', :value => nil}) if request.cookies['notice']
 end
 
 get '/' do
@@ -95,14 +92,21 @@ get '/tickets/new' do
 end
 
 post '/tickets' do
-  response.set_cookie('name', params[:name])
-  response.set_cookie('component_id', params[:component_id])
+  set_cookie('name', {:path => '/', :expires => Time.now + 60*60*24*365, :value => params[:name]})
+  set_cookie('component_id', {:path => '/', :expires => Time.now + 60*60*24*365, :value => params[:component_id]})
 
-  response.set_cookie('notice', Ticket.create(params).created? ? 'ticket_success' : 'ticket_error')
+  set_cookie('notice', {:path => '/', :value => Ticket.create(params).created? ? 'ticket_success' : 'ticket_error'})
   redirect '/'
 end
 
 get '/tickets/:id' do
   @ticket = Ticket.find(params[:id]) || raise(Sinatra::NotFound)
   haml :ticket
+end
+
+post '/tickets/:id/comments' do
+  set_cookie('name', {:path => '/', :expires => Time.now + 60*60*24*365, :value => params[:name]})
+  
+  set_cookie('notice', {:path => '/', :value => Comment.create(params).created? ? 'comment_success' : 'comment_error'})
+  redirect "/tickets/#{params[:id]}"
 end

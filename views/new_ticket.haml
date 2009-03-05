@@ -6,7 +6,7 @@
   %form{:action => '/tickets', :method => 'post'}
   
     %h3 Your Details
-    .new-ticket-fields
+    .fields
       %fieldset
         .field
           %label{:for => 'name'} Name
@@ -19,13 +19,13 @@
                 %option{:value => component[0], :selected => 'selected'}= h(component[1])
               - else
                 %option{:value => component[0]}= h(component[1])
-    .new-ticket-help
+    .field-help
       .help
         %p
           We'll remember these details for next time.
           
     %h3 Your Issue
-    .new-ticket-fields       
+    .fields       
       %fieldset
         .field
           %label{:for => 'summary'} Summary
@@ -33,7 +33,7 @@
         .field
           %label{:for => 'description'} Description
           %textarea{:name => 'description'}
-    .new-ticket-help
+    .field-help
       .help
         %p
           Provide a descriptive summary and include as much information as possible in the description. This will help us address the issue faster.
@@ -42,7 +42,7 @@
           If you need to provide screenshots or images, please <a href="mailto:helpdesk@amc.org.au">email helpdesk</a> with the images attached.
 
     %h3 All Done?
-    .new-ticket-fields
+    .fields
       %fieldset.submit
         %p
           Thanks for letting us know about your issue. We'll do our best to get back to you within 24 hours.

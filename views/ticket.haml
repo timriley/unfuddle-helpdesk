@@ -1,6 +1,13 @@
 - @title = @ticket.summary
 
 #ticket
+  - if request.cookies['notice'] == 'comment_success'
+    .success
+      Comment added successfully.
+  - elsif request.cookies['notice'] == 'comment_error'
+    .error
+      Error adding your comment. Please try again or contact IT.
+
   %h3= h(@ticket.summary)
   
   - reset_cycle
@@ -52,6 +59,29 @@
       .body
         %p
           = convert_breaks(h(comment.body))
-      
-
+          
+  %h4 Submit Your Comment
   
+  #new-comment
+    %form{:action => "/tickets/#{@ticket.number}/comments", :method => 'post'}
+      %input{:type => 'hidden', :name => 'ticket_id', :value => @ticket.id}/
+      .fields
+        %fieldset
+          .field
+            %label{:for => 'name'} Name
+            %input{:type => 'text', :name => 'name', :value => request.cookies['name']}/
+      .field-help
+        .help
+          %p
+            We'll remember this for next time.
+      .fields
+        %fieldset
+          .field
+            %label{:for => 'body'} Comment
+            %textarea{:name => 'body'}
+          .field
+            %input{:type => 'submit', :value => 'Submit'}/
+      .field-help
+        .help
+          %p
+            Update us on the status of your issue here. Please notify us quickly about any new information or changes. This will help us address the issue faster.

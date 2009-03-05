@@ -49,15 +49,15 @@ class Ticket < UnfuddleRecord
   end
   
   def reporter_name
-    if @attributes.summary.match(Ticket.delimiter)
-      @attributes.summary.split(Ticket.delimiter).first
+    if @attributes.summary.match(self.class.delimiter)
+      @attributes.summary.split(self.class.delimiter).first
     else
       Person.find(@attributes.reporter_id).first_name
     end
   end
   
   def summary
-    @attributes.summary.match(Ticket.delimiter) ? @attributes.summary.split(Ticket.delimiter).last : @attributes.summary
+    @attributes.summary.match(self.class.delimiter) ? @attributes.summary.split(self.class.delimiter).last : @attributes.summary
   end
   
   private

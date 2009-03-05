@@ -1,3 +1,9 @@
+- namespace the form params so we can do Comment.create(params[:comment])
+
+- email notification when ticket is submitted
+
+- redirect user straight to ticket's page when ticket is suvmitted?
+
 - textilize the ticket bodies.
 
 - provide a way for people to submit comments for a ticket
