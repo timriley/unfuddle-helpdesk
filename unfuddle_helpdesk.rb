@@ -75,6 +75,13 @@ helpers do
       t.helpdesk_url
     end
   end
+  def out_of_bounds?(t)
+    if params.keys.include?('admin')
+      t.out_of_bounds? || t.incomplete?
+    else
+      t.out_of_bounds?
+    end
+  end
 end
 
 before do

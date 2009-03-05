@@ -32,7 +32,6 @@ class Ticket < UnfuddleRecord
   end
   
   def out_of_bounds?
-    # neglected? || incomplete? || overdue?
     neglected? || overdue?
   end
   

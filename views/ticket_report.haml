@@ -31,9 +31,9 @@
         %tbody
           - reset_cycle
           - group.unassigned_tickets.each do |ticket|
-            %tr{:class => "#{ticket.out_of_bounds? ? 'out-of-bounds' : 'unassigned'} #{cycle}"}
+            %tr{:class => "#{out_of_bounds?(ticket) ? 'out-of-bounds' : 'unassigned'} #{cycle}"}
               = partial('ticket_row', :locals => {:ticket => ticket})
               
           - group.assigned_tickets.each do |ticket|
-            %tr{:class => "#{'out-of-bounds ' if ticket.out_of_bounds?}#{cycle}"}
+            %tr{:class => "#{'out-of-bounds ' if out_of_bounds?(ticket)}#{cycle}"}
               = partial('ticket_row', :locals => {:ticket => ticket})
