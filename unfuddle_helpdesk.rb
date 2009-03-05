@@ -68,6 +68,13 @@ helpers do
     return date.strftime('%B %e') if days.abs < 182
     return date.strftime('%B %e, %Y')
   end
+  def ticket_url(t)
+    if params.keys.include?('admin')
+      t.admin_url
+    else
+      t.helpdesk_url
+    end
+  end
 end
 
 before do

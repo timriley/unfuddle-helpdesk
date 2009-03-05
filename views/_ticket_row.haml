@@ -1,5 +1,5 @@
 %td{:nowrap => 'nowrap'}
-  %a{:href => "/tickets/#{h(ticket.number)}"}= "##{h(ticket.number)}"
+  %a{:href => ticket_url(ticket)}= "##{h(ticket.number)}"
 %td{:width => '100%'}
   = h(ticket.summary)
 %td{:nowrap => 'nowrap'}

@@ -32,16 +32,30 @@ class Ticket < UnfuddleRecord
   end
   
   def out_of_bounds?
+    # neglected? || incomplete? || overdue?
     neglected? || overdue?
   end
   
-  # Older than 24 hours and still unassigned  
+  # Older than 24 hours and still unassigned
   def neglected?
     !assigned? && created_at < (Time.now - (1*24*60*60))
   end
   
+  # neglected, or assigned but still without a due date
+  def incomplete?
+    neglected? || !due_on
+  end
+  
   def overdue?
     @attributes.due_on ? @attributes.due_on < Date.today : false
+  end
+  
+  def helpdesk_url
+    "/tickets/#{number}"
+  end
+  
+  def admin_url
+    "https://#{Sinatra::Application.unfuddle_subdomain}.unfuddle.com/projects/#{Sinatra::Application.unfuddle_project_id}/tickets/by_number/#{number}"
   end
   
   def assignee_name
