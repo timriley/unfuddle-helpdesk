@@ -36,9 +36,12 @@ class Ticket < UnfuddleRecord
     !assigned? && created_at < (Time.now - (1*24*60*60))
   end
   
-  # neglected, or assigned but still without a due date
+  def neglected_for_admins?
+    incomplete? && created_at < (Time.now - (1*24*60*60))
+  end
+
   def incomplete?
-    neglected? || !due_on
+    !assigned? || !due_on
   end
   
   def overdue?
@@ -50,11 +53,7 @@ class Ticket < UnfuddleRecord
   end
   
   def out_of_bounds_for_admins?
-    if !neglected?
-      false
-    else
-      out_of_bounds? || incomplete?
-    end
+    neglected_for_admins? || overdue?
   end
   
   def helpdesk_url
