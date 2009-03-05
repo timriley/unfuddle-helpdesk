@@ -77,7 +77,7 @@ helpers do
   end
   def out_of_bounds?(t)
     if params.keys.include?('admin')
-      t.out_of_bounds? || t.incomplete?
+      t.out_of_bounds_for_admins?
     else
       t.out_of_bounds?
     end

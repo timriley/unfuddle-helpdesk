@@ -31,10 +31,6 @@ class Ticket < UnfuddleRecord
     !!@attributes.assignee_id
   end
   
-  def out_of_bounds?
-    neglected? || overdue?
-  end
-  
   # Older than 24 hours and still unassigned
   def neglected?
     !assigned? && created_at < (Time.now - (1*24*60*60))
@@ -47,6 +43,18 @@ class Ticket < UnfuddleRecord
   
   def overdue?
     @attributes.due_on ? @attributes.due_on < Date.today : false
+  end
+  
+  def out_of_bounds?
+    neglected? || overdue?
+  end
+  
+  def out_of_bounds_for_admins?
+    if !neglected?
+      false
+    else
+      out_of_bounds? || incomplete?
+    end
   end
   
   def helpdesk_url
