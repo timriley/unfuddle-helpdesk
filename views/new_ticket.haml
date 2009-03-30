@@ -9,11 +9,11 @@
     .fields
       %fieldset
         .field
-          %label{:for => 'name'} Name
-          %input{:type => 'text', :name => 'name', :value => request.cookies['name']}/
+          %label{:for => 'ticket[name]'} Name
+          %input{:type => 'text', :name => 'ticket[name]', :value => request.cookies['name']}/
         .field
-          %label{:for => 'component_id'} Section
-          %select{:name => 'component_id'}
+          %label{:for => 'ticket[component_id]'} Section
+          %select{:name => 'ticket[component_id]'}
             - Sinatra::Application.unfuddle_components.each do |component|
               - if request.cookies['component_id'].to_i == component[0].to_i
                 %option{:value => component[0], :selected => 'selected'}= h(component[1])
@@ -28,11 +28,11 @@
     .fields       
       %fieldset
         .field
-          %label{:for => 'summary'} Summary
-          %input{:type => 'text', :name => 'summary'}/
+          %label{:for => 'ticket[summary]'} Summary
+          %input{:type => 'text', :name => 'ticket[summary]'}/
         .field
           %label{:for => 'description'} Description
-          %textarea{:name => 'description'}
+          %textarea{:name => 'ticket[description]'}
     .field-help
       .help
         %p

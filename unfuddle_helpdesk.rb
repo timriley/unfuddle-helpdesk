@@ -2,6 +2,7 @@ require 'rubygems'
 
 gem 'sinatra', '~> 0.9'
 require 'sinatra'
+# require '../sinatra-tim/lib/sinatra'
 
 gem 'haml', '~> 2.1'
 require 'haml'
@@ -107,10 +108,10 @@ get '/tickets/new' do
 end
 
 post '/tickets' do
-  set_cookie('name', {:path => '/', :expires => Time.now + 60*60*24*365, :value => params[:name]})
-  set_cookie('component_id', {:path => '/', :expires => Time.now + 60*60*24*365, :value => params[:component_id]})
-
-  flash[:notice] = Ticket.create(params).created? ? 'ticket_success' : 'ticket_error'
+  set_cookie('name', {:path => '/', :expires => Time.now + 60*60*24*365, :value => params[:ticket][:name]})
+  set_cookie('component_id', {:path => '/', :expires => Time.now + 60*60*24*365, :value => params[:ticket][:component_id]})
+  
+  flash[:notice] = Ticket.create(params[:ticket]).created? ? 'ticket_success' : 'ticket_error'
   redirect '/'
 end
 
@@ -120,8 +121,8 @@ get '/tickets/:id' do
 end
 
 post '/tickets/:id/comments' do
-  set_cookie('name', {:path => '/', :expires => Time.now + 60*60*24*365, :value => params[:name]})
+  set_cookie('name', {:path => '/', :expires => Time.now + 60*60*24*365, :value => params[:comment][:name]})
 
-  flash[:notice] = Comment.create(params).created? ? 'comment_success' : 'comment_error'
+  flash[:notice] = Comment.create(params[:comment]).created? ? 'comment_success' : 'comment_error'
   redirect "/tickets/#{params[:id]}"
 end

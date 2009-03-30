@@ -64,12 +64,12 @@
   
   #new-comment
     %form{:action => "/tickets/#{@ticket.number}/comments", :method => 'post'}
-      %input{:type => 'hidden', :name => 'ticket_id', :value => @ticket.id}/
+      %input{:type => 'hidden', :name => 'comment[ticket_id]', :value => @ticket.id}/
       .fields
         %fieldset
           .field
-            %label{:for => 'name'} Name
-            %input{:type => 'text', :name => 'name', :value => request.cookies['name']}/
+            %label{:for => 'comment[name]'} Name
+            %input{:type => 'text', :name => 'comment[name]', :value => request.cookies['name']}/
       .field-help
         .help
           %p
@@ -77,8 +77,8 @@
       .fields
         %fieldset
           .field
-            %label{:for => 'body'} Comment
-            %textarea{:name => 'body'}
+            %label{:for => 'comment[body]'} Comment
+            %textarea{:name => 'comment[body]'}
           .field
             %input{:type => 'submit', :value => 'Submit'}/
       .field-help
