@@ -13,14 +13,19 @@ require 'compass'
 gem 'timriley-httparty'
 require 'httparty'
 
+gem 'nakajima-rack-flash'
+require 'rack-flash'
+
 require 'yaml'
 require 'ostruct'
 require 'net/http'
 
+use Rack::Flash
+
 configure do
   require File.join(File.dirname(__FILE__), 'app_config')
   enable :sessions
-  
+
   Compass.configuration do |config|
     config.project_path = File.dirname(__FILE__)
     config.sass_dir     = File.join('views', 'stylesheets')
@@ -34,14 +39,14 @@ end
 helpers do
   include Rack::Utils
   alias_method :h, :escape_html
-  
+
   def versioned_stylesheet(stylesheet)
     "/stylesheets/#{stylesheet}.css?" + File.mtime(File.join(Sinatra::Application.views, "stylesheets", "#{stylesheet}.sass")).to_i.to_s
   end
   def versioned_js(js)
     "/javascripts/#{js}.js?" + File.mtime(File.join(Sinatra::Application.public, "javascripts", "#{js}.js")).to_i.to_s
   end
-  
+
   def partial(name, options = {})
     haml(:"_#{name}", options.merge!(:layout => false))
   end
@@ -84,10 +89,6 @@ helpers do
   end
 end
 
-before do
-  set_cookie('notice', {:path => '/', :value => nil}) if request.cookies['notice']
-end
-
 get '/' do
   @ticket_report = TicketReport.find(Sinatra::Application.unfuddle_ticket_report_id)
   haml :ticket_report
@@ -109,7 +110,7 @@ post '/tickets' do
   set_cookie('name', {:path => '/', :expires => Time.now + 60*60*24*365, :value => params[:name]})
   set_cookie('component_id', {:path => '/', :expires => Time.now + 60*60*24*365, :value => params[:component_id]})
 
-  set_cookie('notice', {:path => '/', :value => Ticket.create(params).created? ? 'ticket_success' : 'ticket_error'})
+  flash[:notice] = Ticket.create(params).created? ? 'ticket_success' : 'ticket_error'
   redirect '/'
 end
 
@@ -120,7 +121,7 @@ end
 
 post '/tickets/:id/comments' do
   set_cookie('name', {:path => '/', :expires => Time.now + 60*60*24*365, :value => params[:name]})
-  
-  set_cookie('notice', {:path => '/', :value => Comment.create(params).created? ? 'comment_success' : 'comment_error'})
+
+  flash[:notice] = Comment.create(params).created? ? 'comment_success' : 'comment_error'
   redirect "/tickets/#{params[:id]}"
 end

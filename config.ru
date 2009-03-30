@@ -6,7 +6,7 @@ gem 'sinatra', '~> 0.9'
 require 'sinatra'
 
 set :run      => false,
-    :env      => :production,
+    :environment => :production,
     :root     => File.dirname(__FILE__),
     :views    => File.dirname(__FILE__) + "/views",
     :public   => File.dirname(__FILE__) + "/public",

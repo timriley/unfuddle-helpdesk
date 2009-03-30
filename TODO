@@ -1,3 +1,5 @@
+- show the created_at timestamp in the ticket show page.
+
 - namespace the form params so we can do Comment.create(params[:comment])
 
 - email notification when ticket is submitted

@@ -1,10 +1,10 @@
 - @title = @ticket.summary
 
 #ticket
-  - if request.cookies['notice'] == 'comment_success'
+  - if flash[:notice] == 'comment_success'
     .success
       Comment added successfully.
-  - elsif request.cookies['notice'] == 'comment_error'
+  - elsif flash[:notice] == 'comment_error'
     .error
       Error adding your comment. Please try again or contact IT.
 

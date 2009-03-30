@@ -85,9 +85,10 @@ class Ticket < UnfuddleRecord
   def self.prepare_attributes(attrs)
     attrs[:summary].capitalize!
 
-    # Strip tags
+
     [:name, :summary, :description].each do |attr|
-      attrs[attr].gsub!(/<\/?[^>]*>/, "")
+      attrs[attr].gsub!(/<\/?[^>]*>/, "") # Strip tags
+      attrs[attr].delete!("\C-M")         # Remove control chars
     end
     
     attrs
