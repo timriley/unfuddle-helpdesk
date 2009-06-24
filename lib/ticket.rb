@@ -80,6 +80,10 @@ class Ticket < UnfuddleRecord
     @attributes.summary.match(self.class.delimiter) ? @attributes.summary.split(self.class.delimiter).last : @attributes.summary
   end
   
+  def get(attribute)
+    @attributes.send(attribute)
+  end
+  
   private
   
   def self.prepare_attributes(attrs)

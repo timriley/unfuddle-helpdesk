@@ -23,6 +23,10 @@ require 'net/http'
 
 use Rack::Flash
 
+CONFIG = {'memcached' => 'localhost:11211'}
+
+require 'lib/cache'  
+
 configure do
   require File.join(File.dirname(__FILE__), 'app_config')
   enable :sessions
@@ -125,4 +129,9 @@ post '/tickets/:id/comments' do
 
   flash[:notice] = Comment.create(params[:comment]).created? ? 'comment_success' : 'comment_error'
   redirect "/tickets/#{params[:id]}"
+end
+
+get '/dashboard' do
+  @ticket_report = TicketReport.find(Sinatra::Application.unfuddle_ticket_report_id)
+  haml :dashboard
 end
