@@ -17,4 +17,11 @@ class TicketGroup < UnfuddleRecord
   def assigned_tickets
     @assigned_tickets ||= @tickets.select { |t| !t.assignee_id.nil? }
   end
+  
+  def tickets_by_status(status)
+    @tickets.select { |t| t.get(:status) == status }
+  end
+  def tickets_not_by_status(status)
+    @tickets.select { |t| t.get(:status) != status }
+  end
 end

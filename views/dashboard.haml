@@ -1,0 +1,38 @@
+- @title = 'Dashboard'
+
+#tickets
+  %h1
+    Helpdesk Dashboard
+  #buttons
+    %ul
+      %li
+        %a{:href => '/tickets/new'} <span>New Ticket</span>
+
+  - @ticket_report.ticket_groups.each do |group|
+  
+    .component
+      %h3
+        Reports
+      %table.tickets{:cellpadding => 0, :cellspacing => 0}
+        %thead
+          %tr
+            %th Type
+            %th Count
+        %tbody
+          %tr
+            %td
+              Total
+            %td
+              = group.tickets.size
+          %tr
+            %td
+              Open
+            %td
+              = group.tickets_not_by_status("closed").size
+              = (group.tickets_not_by_status("closed").size.to_f / group.tickets.size.to_f * 100.0).to_i.to_s + "%"
+          %tr
+            %td
+              Closed
+            %td
+              = group.tickets_by_status("closed").size
+              = (group.tickets_by_status("closed").size.to_f / group.tickets.size.to_f * 100.0).to_i.to_s + "%"
